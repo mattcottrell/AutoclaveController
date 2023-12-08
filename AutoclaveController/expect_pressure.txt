@@ -1,0 +1,26 @@
+
+set prompt "#"
+set address C4:64:E3:3F:6B:67
+spawn bluetoothctl
+send "scan on\r"
+expect -re $prompt
+send "connect $address\r"
+expect "Connection successful"
+#sleep 1
+send "scan off\r"
+sleep 5
+expect -re $prompt
+#sleep 1
+send "gatt.select-attribute /org/bluez/hci0/dev_C4_64_E3_3F_6B_67/service0009/char000a\r"
+#sleep 1
+expect -re $prompt
+#sleep 1
+#send "gatt.notify on\r"  
+send "gatt.read\r"  
+expect -re $prompt
+#sleep 10
+#send "exit\r"
+#sleep 1
+#send "exit\r"
+#send "quit\r"
+expect eof

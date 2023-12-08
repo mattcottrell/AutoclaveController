@@ -1,0 +1,22 @@
+
+#png("/home/alcolyzer/Documents/Autoclave/data/graph.png")
+
+png("/home/alcolyzer/Applications/Autoclave/Autoclave\ Resources/graph.png")
+
+PressureLog <- read.delim("/home/alcolyzer/Documents/Autoclave/data/log/PresentLogFile.txt", header=FALSE)
+
+library(lubridate)
+
+myTime <- hms(PressureLog$V2)
+
+myTime <- as.numeric(myTime)
+
+Pressure <- PressureLog$V6
+
+Minutes = (myTime - myTime[1])/100
+
+plot(Minutes, Pressure, 'o')
+
+dev.off()
+
+#system("open /home/alcolyzer/Documents/Autoclave/data/graph.png") 
